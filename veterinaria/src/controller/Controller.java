@@ -50,7 +50,7 @@ public class Controller {
 			return pacienteSelecionado;
 		}
 		public static void setPacienteSelecionadoNull(){
-			clienteSelecionado = null;
+			pacienteSelecionado = null;
 		}
 		
 		public static Veterinario getVeterinarioSelecionado() {

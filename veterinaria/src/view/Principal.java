@@ -121,7 +121,7 @@ public class Principal {
 	private void myInitComponents() {
 		Controller.setTableModel(tableCliente, new ProprietarioTableModel(ProprietarioDAO.getInstance().retrieveAll()));
 		Controller.setTextFields(textFieldClienteSelecionado, textFieldPacienteSelecionado, textFieldEspecieSelecionada, textFieldAgendamentoPaciente, textFieldAgendamentoVeterinario, textFieldVeterinarioSelecionadoReceita);
-		Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
+		Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAllActive()));
 		Controller.setTableModel(tableProdutoEstoque, new ProdutoEstoqueTableModel(ProdutoDAO.getInstance().retrieveAll()));
 	}
 	
@@ -132,7 +132,7 @@ public class Principal {
 		Controller.setTableModel(tablePaciente, new PacienteTableModel(PacienteDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));
 	}
 	public void atualizarTableVeterinario() {
-		Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
+		Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAllActive()));
 	}
 	public void atualizarTableProdutoEstoque() {
 		Controller.setTableModel(tableProdutoEstoque, new ProdutoEstoqueTableModel(ProdutoDAO.getInstance().retrieveAll()));
@@ -260,8 +260,6 @@ public class Principal {
 		scrollPaneHistoricoObservacoes.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		lblHistoricoObservacao.setLabelFor(textAreaHistoricoObservacoes);
 		panelHistoricoPacienteSelecionado.add(scrollPaneHistoricoObservacoes);
-		
-		
 		
 		btnEditarHistorico = new JButton("Editar");
 		btnEditarHistorico.setEnabled(false);
@@ -700,7 +698,7 @@ public class Principal {
 		btnTodosVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
+				Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAllActive()));
 			}
 		});
 		btnTodosVeterinario.setBounds(279, 25, 77, 23);
@@ -723,8 +721,8 @@ public class Principal {
 			public void mouseClicked(MouseEvent e) {
 				if(Controller.getVeterinarioSelecionado() != null)
 				{
-					VeterinarioDAO.getInstance().delete(Controller.getVeterinarioSelecionado());
-					Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAll()));
+					VeterinarioDAO.getInstance().softDelete(Controller.getVeterinarioSelecionado());
+					Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAllActive()));
 					textFieldAgendamentoVeterinario.setText("");
 					textFieldVeterinarioSelecionadoReceita.setText("");
 					Controller.setVeterinarioSelecionadoNull();		

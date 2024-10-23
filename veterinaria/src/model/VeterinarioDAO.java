@@ -26,11 +26,12 @@ public class VeterinarioDAO extends DAO {
     public Veterinario create(String nome, String email, String telefone) {
         try {
             PreparedStatement stmt = DAO.getConnection().prepareStatement(
-                "INSERT INTO veterinario (nome, email, telefone) VALUES (?,?,?)"
+                "INSERT INTO veterinario (nome, email, telefone, is_active) VALUES (?,?,?,?)"
             );
             stmt.setString(1, nome);
             stmt.setString(2, email);
             stmt.setString(3, telefone);
+            stmt.setBoolean(4, true);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(VeterinarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,6 +69,14 @@ public class VeterinarioDAO extends DAO {
     public List<Veterinario> retrieveAll() {
         return this.retrieve("SELECT * FROM veterinario");
     }
+    
+    public List<Veterinario> retrieveAllActive() {
+        return this.retrieve("SELECT * FROM veterinario WHERE is_active = TRUE");
+    }
+    
+    public List<Veterinario> retrieveAllInactive() {
+        return this.retrieve("SELECT * FROM veterinario WHERE is_active = FALSE");
+    }
 
     public List<Veterinario> retrieveLast() {
         return this.retrieve("SELECT * FROM veterinario WHERE id = " + lastId("veterinario", "id"));
@@ -85,12 +94,13 @@ public class VeterinarioDAO extends DAO {
     public void update(Veterinario veterinario) {
         try {
             PreparedStatement stmt = DAO.getConnection().prepareStatement(
-                "UPDATE veterinario SET nome=?, email=?, telefone=? WHERE id=?"
+                "UPDATE veterinario SET nome=?, email=?, telefone=?, is_active=? WHERE id=?"
             );
             stmt.setString(1, veterinario.getNome());
             stmt.setString(2, veterinario.getEmail());
             stmt.setString(3, veterinario.getTelefone());
-            stmt.setInt(4, veterinario.getId());
+            stmt.setBoolean(4, veterinario.Is_active());
+            stmt.setInt(5, veterinario.getId());
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -100,6 +110,18 @@ public class VeterinarioDAO extends DAO {
     public void delete(Veterinario veterinario) {
         try {
             PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM veterinario WHERE id = ?");
+            stmt.setInt(1, veterinario.getId());
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+    
+    public void softDelete(Veterinario veterinario) {
+        try {
+            PreparedStatement stmt = DAO.getConnection().prepareStatement(
+                "UPDATE veterinario SET is_active = FALSE WHERE id = ?"
+            );
             stmt.setInt(1, veterinario.getId());
             executeUpdate(stmt);
         } catch (SQLException e) {

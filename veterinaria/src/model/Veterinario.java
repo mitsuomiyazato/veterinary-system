@@ -6,12 +6,14 @@ public class Veterinario {
     private String nome;
     private String email;
     private String telefone;
+    private boolean is_active;
 
     public Veterinario(int id, String nome, String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.setIs_active(true);
     }
 
     public int getId() {
@@ -46,6 +48,14 @@ public class Veterinario {
 		this.telefone = telefone;
 	}
 
+	public boolean Is_active() {
+		return is_active;
+	}
+
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+	
     @Override
     public String toString() {
         return "Veterinario{" +
@@ -54,6 +64,4 @@ public class Veterinario {
                 ", telefone=" + telefone +
                 '}';
     }
-
-
 }

@@ -132,7 +132,8 @@ public abstract class DAO {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nome VARCHAR, " +
                 "email VARCHAR, " +
-                "telefone VARCHAR );"
+                "telefone VARCHAR, " +
+                "is_active BOOLEAN );"
             );
             executeUpdate(stmt);
 

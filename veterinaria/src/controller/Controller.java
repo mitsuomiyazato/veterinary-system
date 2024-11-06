@@ -9,6 +9,7 @@ import model.Fatura;
 import model.Paciente;
 import model.Produto;
 import model.Proprietario;
+import model.ReceitaMedica;
 import model.Veterinario;
 
 public class Controller {
@@ -18,6 +19,7 @@ public class Controller {
 		private static Agendamento agendamentoSelecionado = null;
 		private static Produto produtoSelecionado = null;
 		private static Fatura faturaSelecionado = null;
+		private static ReceitaMedica receitaSelecionado = null;
 		
 		private static JTextField clienteSelecionadoTextField = null;
 		private static JTextField pacienteSelecionadoTextField = null;
@@ -81,6 +83,13 @@ public class Controller {
 			faturaSelecionado = null;
 		}
 		
+		public static ReceitaMedica getReceitaSelecionado() {
+			return receitaSelecionado;
+		}
+		public static void setreceitaSelecionadoNull(){
+			receitaSelecionado = null;
+		}
+		
 		public static void setSelected(Object selected) {
 			if(selected instanceof Proprietario) {
 				setPacienteSelecionadoNull();
@@ -105,6 +114,8 @@ public class Controller {
 				produtoSelecionado = (Produto)selected;
 			} else if(selected instanceof Fatura) {
 				faturaSelecionado = (Fatura)selected;
+			} else if(selected instanceof ReceitaMedica ) {
+				receitaSelecionado = (ReceitaMedica)selected;
 			}
 		}
 	

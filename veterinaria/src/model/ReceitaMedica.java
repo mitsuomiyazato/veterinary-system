@@ -52,9 +52,6 @@ public class ReceitaMedica {
     public void setDataEmissao(LocalDateTime dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
-    public void imprimir() {
-    	System.out.println("Gerando Arquivo PDF");
-    }
     
     public String getObservacoes() {
     	return observacoes;

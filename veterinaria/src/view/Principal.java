@@ -68,7 +68,9 @@ public class Principal {
 	private int finalizado = 0;
 	
 	private JButton btnAddVacinas;
+	private JButton btnDelVacinas;
 	private JButton btnAddDoencas;
+	private JButton btnDelDoencas;
 	
 	private JTextField textFieldBuscarCliente;
 	private JTextField textFieldBuscarPaciente;
@@ -123,6 +125,7 @@ public class Principal {
 		Controller.setTextFields(textFieldClienteSelecionado, textFieldPacienteSelecionado, textFieldEspecieSelecionada, textFieldAgendamentoPaciente, textFieldAgendamentoVeterinario, textFieldVeterinarioSelecionadoReceita);
 		Controller.setTableModel(tableVeterinario, new VeterinarioTableModel(VeterinarioDAO.getInstance().retrieveAllActive()));
 		Controller.setTableModel(tableProdutoEstoque, new ProdutoEstoqueTableModel(ProdutoDAO.getInstance().retrieveAll()));
+		Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
 	}
 	
 	public void atualizarTableCliente() {
@@ -248,14 +251,14 @@ public class Principal {
 		textFieldHistoricoPeso.setColumns(10);
 		
 		JLabel lblHistoricoObservacao = new JLabel("Observações:");
-		lblHistoricoObservacao.setBounds(394, 22, 115, 14);
+		lblHistoricoObservacao.setBounds(475, 22, 115, 14);
 		panelHistoricoPacienteSelecionado.add(lblHistoricoObservacao);
 		textAreaHistoricoObservacoes = new JTextArea();
 		textAreaHistoricoObservacoes.setEditable(false);
 		textAreaHistoricoObservacoes.setLineWrap(true); 
 		textAreaHistoricoObservacoes.setWrapStyleWord(true);
 		JScrollPane scrollPaneHistoricoObservacoes = new JScrollPane(textAreaHistoricoObservacoes);
-		scrollPaneHistoricoObservacoes.setBounds(394, 44, 409, 110);
+		scrollPaneHistoricoObservacoes.setBounds(475, 44, 328, 110);
 		scrollPaneHistoricoObservacoes.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneHistoricoObservacoes.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		lblHistoricoObservacao.setLabelFor(textAreaHistoricoObservacoes);
@@ -272,7 +275,9 @@ public class Principal {
 						finalizado = 1;
 						btnEditarHistorico.setText("Finalizar");
 						btnAddVacinas.setEnabled(true);
+						btnDelVacinas.setEnabled(true);
 						btnAddDoencas.setEnabled(true);
+						btnDelDoencas.setEnabled(true);
 						
 						comboBoxHistoricoVacinas.setEditable(true);
 						JTextField editorVacinas = (JTextField) comboBoxHistoricoVacinas.getEditor().getEditorComponent();
@@ -308,15 +313,21 @@ public class Principal {
 					else
 					{
 						List<String> vacinasList = new ArrayList<>();
-						for(int i = 0; i < comboBoxHistoricoVacinas.getItemCount(); i++) {
-							vacinasList.add(comboBoxHistoricoVacinas.getItemAt(i));
+						if(comboBoxHistoricoVacinas.getItemCount() != 0)
+						{
+							for(int i = 0; i < comboBoxHistoricoVacinas.getItemCount(); i++) {
+								vacinasList.add(comboBoxHistoricoVacinas.getItemAt(i));
+							}
+							comboBoxHistoricoVacinas.setSelectedItem(vacinasList.getFirst());
 						}
 						List<String> doencasList = new ArrayList<>();
-						for(int i = 0; i < comboBoxHistoricoDoencas.getItemCount(); i++) {
-							doencasList.add(comboBoxHistoricoDoencas.getItemAt(i));
-						}						
-						comboBoxHistoricoVacinas.setSelectedItem(vacinasList.getFirst());
-						comboBoxHistoricoDoencas.setSelectedItem(doencasList.getFirst());
+						if(comboBoxHistoricoDoencas.getItemCount() != 0)
+						{
+							for(int i = 0; i < comboBoxHistoricoDoencas.getItemCount(); i++) {
+								doencasList.add(comboBoxHistoricoDoencas.getItemAt(i));
+							}			
+							comboBoxHistoricoDoencas.setSelectedItem(doencasList.getFirst());
+						}
 						Historico historicoEditar = new Historico(HistoricoDAO.getInstance().retrieveByIdPaciente(Controller.getPacienteSelecionado().getId()).getId(),Controller.getPacienteSelecionado(),vacinasList, doencasList, textFieldHistoricoPeso.getText(),textAreaHistoricoObservacoes.getText());
 						HistoricoDAO.getInstance().update(historicoEditar);
 						comboBoxHistoricoVacinas.setEditable(false);
@@ -325,7 +336,9 @@ public class Principal {
 						textAreaHistoricoObservacoes.setEditable(false);
 						finalizado = 0;
 						btnAddVacinas.setEnabled(false);
+						btnDelVacinas.setEnabled(false);
 						btnAddDoencas.setEnabled(false);
+						btnDelDoencas.setEnabled(false);
 						btnEditarHistorico.setText("Editar");
 					}
 				}
@@ -343,6 +356,42 @@ public class Principal {
 		btnAddDoencas.setEnabled(false);
 		btnAddDoencas.setBounds(306, 74, 70, 23);
 		panelHistoricoPacienteSelecionado.add(btnAddDoencas);
+		
+		btnDelVacinas = new JButton("Apagar");
+		btnDelVacinas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = comboBoxHistoricoVacinas.getSelectedIndex();
+				if(selectedIndex != -1)
+				{
+					comboBoxHistoricoVacinas.removeItemAt(selectedIndex);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Selecione um item!");
+				}
+			}
+		});
+		btnDelVacinas.setEnabled(false);
+		btnDelVacinas.setBounds(385, 18, 80, 23);
+		panelHistoricoPacienteSelecionado.add(btnDelVacinas);
+		
+		btnDelDoencas = new JButton("Apagar");
+		btnDelDoencas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedIndex = comboBoxHistoricoDoencas.getSelectedIndex();
+				if(selectedIndex != -1)
+				{
+					comboBoxHistoricoDoencas.removeItemAt(selectedIndex);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Selecione um item!");
+				}
+			}
+		});
+		btnDelDoencas.setEnabled(false);
+		btnDelDoencas.setBounds(385, 74, 80, 23);
+		panelHistoricoPacienteSelecionado.add(btnDelDoencas);
 		//FIM INFORMAÇÕES SELECIONADAS
 		
 		//TAB CLIENTES E PACIENTES
@@ -657,7 +706,7 @@ public class Principal {
 		
 		//TAB NOVA CONSULTA
 		JPanel TabbedPanelAgendamento = new JPanel();
-		tabbedPane.addTab("Nova Consulta", null, TabbedPanelAgendamento, null);
+		tabbedPane.addTab("Veterinários e Consultas", null, TabbedPanelAgendamento, null);
 		TabbedPanelAgendamento.setLayout(null);
 		
 		//SELECIONAR VETERINARIO
@@ -912,7 +961,8 @@ public class Principal {
 				if(Controller.getAgendamentoSelecionado() != null)
 				{
 					AgendamentoDAO.getInstance().delete(Controller.getAgendamentoSelecionado());
-					Controller.setTableModel(tableAgendamento, new AgendamentoTableModel(AgendamentoDAO.getInstance().retrieveByIdPaciente(Controller.getPacienteSelecionado().getId())));					
+					Controller.setTableModel(tableAgendamento, new AgendamentoTableModel(AgendamentoDAO.getInstance().retrieveByIdPaciente(Controller.getPacienteSelecionado().getId())));			
+					Controller.setAgendamentoSelecionadoNull();
 				}
 				else
 				{
@@ -965,12 +1015,12 @@ public class Principal {
 		
 		//TAB RECEITA MÉDICA
 		JPanel TabbedReceitaMedica = new JPanel();
-		tabbedPane.addTab("Gerar Receita Médica", null, TabbedReceitaMedica, null);
+		tabbedPane.addTab("Receitas Médicas", null, TabbedReceitaMedica, null);
 		TabbedReceitaMedica.setLayout(null);
 				
 		JPanel panelSelecionarInfo = new JPanel();
 		panelSelecionarInfo.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Selecione as informa\u00E7\u00F5es", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelSelecionarInfo.setBounds(10, 11, 808, 271);
+		panelSelecionarInfo.setBounds(10, 11, 808, 225);
 		TabbedReceitaMedica.add(panelSelecionarInfo);
 		panelSelecionarInfo.setLayout(null);
 		
@@ -1018,7 +1068,7 @@ public class Principal {
 		textAreaObservacoesReceita.setLineWrap(true); 
 		textAreaObservacoesReceita.setWrapStyleWord(true);
 		JScrollPane scrollPaneObservacoesReceita = new JScrollPane(textAreaObservacoesReceita);
-		scrollPaneObservacoesReceita.setBounds(10, 111, 788, 120);
+		scrollPaneObservacoesReceita.setBounds(10, 111, 788, 73);
 		scrollPaneObservacoesReceita.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneObservacoesReceita.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panelSelecionarInfo.add(scrollPaneObservacoesReceita);
@@ -1051,10 +1101,18 @@ public class Principal {
 						String item = model.getElementAt(i);
 						medicamentos.add(item);
 					}
-					ReceitaMedicaDAO.getInstance().create(Controller.getPacienteSelecionado(), medicamentos, now, textAreaObservacoesReceita.getText(), Controller.getVeterinarioSelecionado());
-					Controller.setTableModel(tableReceita, new ReceitaTableModel(ReceitaMedicaDAO.getInstance().retrieveByPaciente(Controller.getPacienteSelecionado().getId())));
-					textAreaObservacoesReceita.setText("");
-					comboBoxMedicamentosReceita.removeAllItems();
+					
+					if(textAreaObservacoesReceita.getText().trim().isEmpty())
+					{
+						JOptionPane.showMessageDialog(null, "Preencha com as informações necessárias!");
+					}
+					else
+					{
+						ReceitaMedicaDAO.getInstance().create(Controller.getPacienteSelecionado(), medicamentos, now, textAreaObservacoesReceita.getText(), Controller.getVeterinarioSelecionado());
+						Controller.setTableModel(tableReceita, new ReceitaTableModel(ReceitaMedicaDAO.getInstance().retrieveByPaciente(Controller.getPacienteSelecionado().getId())));
+						textAreaObservacoesReceita.setText("");
+						comboBoxMedicamentosReceita.removeAllItems();
+					}
 				}
 				else
 				{
@@ -1062,12 +1120,12 @@ public class Principal {
 				}
 			}
 		});
-		btnImprimirReceita.setBounds(356, 237, 89, 23);
+		btnImprimirReceita.setBounds(357, 191, 89, 23);
 		panelSelecionarInfo.add(btnImprimirReceita);
 			
 		JPanel panelBuscarReceita = new JPanel();
 		panelBuscarReceita.setBorder(new TitledBorder(null, "Buscar Receitas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelBuscarReceita.setBounds(10, 293, 808, 148);
+		panelBuscarReceita.setBounds(10, 247, 808, 194);
 		TabbedReceitaMedica.add(panelBuscarReceita);
 		panelBuscarReceita.setLayout(null);
 		
@@ -1077,6 +1135,10 @@ public class Principal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Controller.setSelected(((GenericTableModel)tableReceita.getModel()).getItem(tableReceita.getSelectedRow()));
+				if(e.getClickCount() == 2 && tableReceita.getSelectedRow() != -1) {
+					VisualizarReceitaMedica receita = new VisualizarReceitaMedica(Controller.getClienteSelecionado().getNomeCompleto(), Controller.getPacienteSelecionado().getNome(), Controller.getReceitaSelecionado().getVeterinario().getNome(), Controller.getReceitaSelecionado().getMedicamentos(), Controller.getReceitaSelecionado().getDataEmissao(), Controller.getReceitaSelecionado().getObservacoes());
+					receita.setVisible(true);
+				}
 			}
 		});
 		tableReceita.setModel(new DefaultTableModel(
@@ -1087,21 +1149,44 @@ public class Principal {
 			}
 		));
 		JScrollPane scrollPaneTableReceita = new JScrollPane(tableReceita);
-		scrollPaneTableReceita.setBounds(10, 22, 788, 115);
+		scrollPaneTableReceita.setBounds(10, 49, 788, 134);
 		panelBuscarReceita.add(scrollPaneTableReceita);  
+		
+		JLabel lblInfoReceitas = new JLabel("Clique para mais detalhes.");
+		lblInfoReceitas.setBounds(10, 24, 180, 14);
+		panelBuscarReceita.add(lblInfoReceitas);
+		
+		JButton btnDeletarReceita = new JButton("Deletar");
+		btnDeletarReceita.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Controller.getReceitaSelecionado() != null)
+				{
+					ReceitaMedicaDAO.getInstance().delete(Controller.getReceitaSelecionado());
+					Controller.setTableModel(tableReceita, new ReceitaTableModel(ReceitaMedicaDAO.getInstance().retrieveByPaciente(Controller.getPacienteSelecionado().getId())));
+					Controller.setreceitaSelecionadoNull();
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Selecione uma receita médica!");
+				}
+			}
+		});
+		btnDeletarReceita.setBounds(666, 20, 132, 23);
+		panelBuscarReceita.add(btnDeletarReceita);
 		//FIM TABELA RECEITA
 		//FIM TAB RECEITA
 				
 		//TAB ESTOQUE
-		JPanel TabbedEstoque = new JPanel();
-		tabbedPane.addTab("Estoque", null, TabbedEstoque, null);
-		TabbedEstoque.setLayout(null);
+		JPanel TabbedPanelEstoque = new JPanel();
+		tabbedPane.addTab("Estoque", null, TabbedPanelEstoque, null);
+		TabbedPanelEstoque.setLayout(null);
 		
 		JPanel GroupBoxProdutos = new JPanel();
 		GroupBoxProdutos.setLayout(null);
 		GroupBoxProdutos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Produtos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxProdutos.setBounds(10, 11, 808, 430);
-		TabbedEstoque.add(GroupBoxProdutos);
+		TabbedPanelEstoque.add(GroupBoxProdutos);
 		
 		JButton btnTodosProdutos = new JButton("Todos");
 		btnTodosProdutos.addMouseListener(new MouseAdapter() {
@@ -1159,7 +1244,6 @@ public class Principal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Controller.setSelected(((GenericTableModel)tableProdutoEstoque.getModel()).getItem(tableProdutoEstoque.getSelectedRow()));
-				System.out.println(Controller.getProdutoSelecionado());
 			}});
 		
 		JScrollPane scrollPaneProdutoEstoque = new JScrollPane(tableProdutoEstoque);
@@ -1193,15 +1277,15 @@ public class Principal {
 		lblBuscarProduto.setBounds(10, 25, 46, 14);
 		GroupBoxProdutos.add(lblBuscarProduto);
 		//FIM TAB ESTOQUE
-		JPanel TabbedPanelEstoque = new JPanel();
-		tabbedPane.addTab("Fatura", null, TabbedPanelEstoque, null);
-		TabbedPanelEstoque.setLayout(null);
+		JPanel TabbedPanelFatura = new JPanel();
+		tabbedPane.addTab("Faturas", null, TabbedPanelFatura, null);
+		TabbedPanelFatura.setLayout(null);
 		
 		JPanel GroupBoxFatura = new JPanel();
 		GroupBoxFatura.setLayout(null);
 		GroupBoxFatura.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Faturas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxFatura.setBounds(10, 11, 808, 430);
-		TabbedPanelEstoque.add(GroupBoxFatura);
+		TabbedPanelFatura.add(GroupBoxFatura);
 				
 		JLabel lblBuscarFatura = new JLabel("Status:");
 		lblBuscarFatura.setBounds(10, 26, 63, 14);
@@ -1211,14 +1295,7 @@ public class Principal {
 		btnTodosFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(Controller.getClienteSelecionado() != null)
-				{
-					Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Selecione um cliente!");
-				}
+				Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
 			}
 		});
 		btnTodosFatura.setBounds(304, 22, 77, 23);
@@ -1246,22 +1323,23 @@ public class Principal {
 		btnApagarFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(Controller.getClienteSelecionado() != null)
-				{
 					if(Controller.getFaturaSelecionado() != null)
 					{
 						FaturaDAO.getInstance().delete(Controller.getFaturaSelecionado());
-						Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));
+						Controller.setFaturaSelecionadoNull();
+						if(Controller.getClienteSelecionado() != null)
+						{
+							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));							
+						}
+						else
+						{
+							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
+						}
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(null, "Selecione uma fatura!");
 					}
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Selecione um cliente!");
-				}
 			}
 		});
 		btnApagarFatura.setBounds(536, 22, 131, 23);
@@ -1271,24 +1349,24 @@ public class Principal {
 		btnConcluirFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(Controller.getClienteSelecionado() != null)
-				{
 					if(Controller.getFaturaSelecionado() != null)
 					{
 						Fatura f = new Fatura(Controller.getFaturaSelecionado().getId(), Controller.getFaturaSelecionado().getProprietario(), Controller.getFaturaSelecionado().getValorTotal(), Fatura.StatusPagamento.PAGO, Controller.getFaturaSelecionado().getDataVencimento());
 						FaturaDAO.getInstance().update(f);
-						Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));	
+						
+						if(Controller.getClienteSelecionado() != null)
+						{
+							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));							
+						}
+						else
+						{
+							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
+						}
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(null, "Selecione uma fatura!");
 					}
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Selecione um cliente!");
-				}
-				
 			}
 		});
 		btnConcluirFatura.setBounds(677, 22, 121, 23);
@@ -1299,7 +1377,7 @@ public class Principal {
 			new Object[][] {
 			},
 			new String[] {
-				"Valor", "Data de Vencimento", "Status"
+				"Nome","Valor", "Data de Vencimento", "Status"
 			}
 		));
 		tableFatura.addMouseListener(new MouseAdapter() {
@@ -1337,6 +1415,23 @@ public class Principal {
 			        } else
 			        {
 			        	Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));	
+			        }
+		    	}
+		    	else
+		    	{
+		    		Fatura.StatusPagamento statusSelecionado = (Fatura.StatusPagamento) comboBoxBuscarFatura.getSelectedItem();
+			        if (statusSelecionado == Fatura.StatusPagamento.EM_ATRASO) {
+			            Controller.setTableModel(tableFatura, new FaturaTableModel(
+			                FaturaDAO.getInstance().retrieveByStatus(Fatura.StatusPagamento.EM_ATRASO)));
+			        } else if (statusSelecionado == Fatura.StatusPagamento.PENDENTE) {
+			            Controller.setTableModel(tableFatura, new FaturaTableModel(
+			                FaturaDAO.getInstance().retrieveByStatus(Fatura.StatusPagamento.PENDENTE)));
+			        } else if (statusSelecionado == Fatura.StatusPagamento.PAGO){
+			            Controller.setTableModel(tableFatura, new FaturaTableModel(
+			                FaturaDAO.getInstance().retrieveByStatus(Fatura.StatusPagamento.PAGO)));
+			        } else
+			        {
+			        	Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));	
 			        }
 		    	}
 		    }

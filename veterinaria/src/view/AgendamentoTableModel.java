@@ -42,10 +42,4 @@ public class AgendamentoTableModel extends GenericTableModel{
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
     }    
-    
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        //if (columnIndex == 0) return false;
-        return false;
-    }      
 }

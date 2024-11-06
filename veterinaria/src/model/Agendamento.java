@@ -73,16 +73,4 @@ public class Agendamento {
 	public void setVeterinario(Veterinario veterinario) {
 		this.veterinario = veterinario;
 	}
-
-    @Override
-    public String toString() {
-        return "Agendamento{" +
-        		"paciente=" + paciente.getNome() +
-                ", dataHora=" + dataHora +
-                ", servico='" + servico + '\'' +
-                ", status=" + status +
-                ", veterinario=" + veterinario.getNome() + '}';
-    }
-
-
 }

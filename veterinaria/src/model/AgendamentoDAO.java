@@ -78,10 +78,6 @@ public class AgendamentoDAO extends DAO {
         return this.retrieve("SELECT * FROM agendamento");
     }
 
-    public List<Agendamento> retrieveLast() {
-        return this.retrieve("SELECT * FROM agendamento WHERE id = " + lastId("agendamento", "id"));
-    }
-
     public Agendamento retrieveById(int id) {
         List<Agendamento> agendamentos = this.retrieve("SELECT * FROM agendamento WHERE id = " + id);
         return (agendamentos.isEmpty() ? null : agendamentos.get(0));
@@ -92,7 +88,7 @@ public class AgendamentoDAO extends DAO {
     }
     
     public List<Agendamento> retrieveByIdVeterinario(int id_veterinario) {
-        return this.retrieve("SELECT * FROM agendamento WHERE id_veterinario= " + id_veterinario);
+        return this.retrieve("SELECT * FROM agendamento WHERE id_veterinario = " + id_veterinario);
     }
     
     public List<Agendamento> returnEmptyList() {

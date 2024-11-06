@@ -8,7 +8,7 @@ import model.ReceitaMedica;
 public class FaturaTableModel extends GenericTableModel{
 
 	public FaturaTableModel(List vDados){
-		super(vDados, new String[]{"Valor", "Data de Vencimento", "Status"});
+		super(vDados, new String[]{"Nome", "Valor", "Data de Vencimento", "Status"});
 	}
 
     @Override
@@ -20,6 +20,8 @@ public class FaturaTableModel extends GenericTableModel{
                 return String.class;
             case 2:
                 return String.class;
+            case 3:
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -30,11 +32,13 @@ public class FaturaTableModel extends GenericTableModel{
         Fatura fatura = (Fatura) vDados.get(rowIndex);
 
         switch (columnIndex) {
-            case 0:
-                return fatura.getValorTotal();
+        	case 0:
+            return fatura.getProprietario().getNomeCompleto();
             case 1:
-                return fatura.getDataVencimento();
+                return fatura.getValorTotal();
             case 2:
+                return fatura.getDataVencimento();
+            case 3:
                 return fatura.getStatus();               
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");

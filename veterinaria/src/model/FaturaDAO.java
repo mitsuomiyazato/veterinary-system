@@ -84,6 +84,11 @@ public class FaturaDAO extends DAO {
     {
     	return this.retrieve("SELECT * FROM fatura WHERE id_proprietario = " + id_proprietario  + " AND status = '" + status.name() + "'");
     }
+    
+    public List<Fatura> retrieveByStatus(Fatura.StatusPagamento status)
+    {
+    	return this.retrieve("SELECT * FROM fatura WHERE status = '" + status.name() + "'");
+    }
 
     public List<Agendamento> returnEmptyList() {
         return new ArrayList<>();

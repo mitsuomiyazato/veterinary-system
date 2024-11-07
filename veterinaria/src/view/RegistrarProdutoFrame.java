@@ -30,6 +30,7 @@ public class RegistrarProdutoFrame extends JFrame {
 
 	public RegistrarProdutoFrame(Principal principalFrame) {
 		setTitle("Registrar Produto");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 363);
 		contentPane = new JPanel();

@@ -30,6 +30,7 @@ public class RegistrarClienteFrame extends JFrame {
 	public RegistrarClienteFrame(Principal principalFrame, Proprietario cliente)
 	{
 		buildJFrame(principalFrame);
+		setResizable(false);
 		textFieldRegistrarNomeCompleto.setText(cliente.getNomeCompleto());
 		textFieldRegistrarCPF.setText(cliente.getCpf());
 		textFieldRegistrarTelefone.setText(cliente.getTelefone());

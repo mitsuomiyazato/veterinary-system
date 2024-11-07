@@ -38,6 +38,7 @@ public class RegistrarPacienteFrame extends JFrame {
 
 	public RegistrarPacienteFrame(Principal principalFrame, Proprietario cliente, Paciente paciente) {
 		buildJFrame(principalFrame);
+		setResizable(false);
 		textFieldRegistrarNome.setText(paciente.getNome());
 		textFieldRegistrarEspecie.setText(paciente.getEspecie());
 		textFieldRegistrarIdade.setText(paciente.getIdade() + "");

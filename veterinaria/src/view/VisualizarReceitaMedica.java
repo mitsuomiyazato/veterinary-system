@@ -20,6 +20,7 @@ public class VisualizarReceitaMedica extends JFrame {
     private JTextField textFieldVeterinario;
 
     public VisualizarReceitaMedica(String cliente, String paciente, String veterinario, List<String> medicamentos, LocalDateTime data, String observacoes) {
+    	setResizable(false);
         setTitle("Receita Médica");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 406, 461);

@@ -138,4 +138,14 @@ public class AgendamentoDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
     }
+    
+    public void deleteByPaciente(int id_paciente) {
+        try {
+            PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM agendamento WHERE id_paciente = ?");
+            stmt.setInt(1, id_paciente);
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
 }

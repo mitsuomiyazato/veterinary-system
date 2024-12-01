@@ -1,9 +1,10 @@
 package view;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.LocalDate;
 
 import model.Fatura;
-import model.ReceitaMedica;
 
 public class FaturaTableModel extends GenericTableModel{
 
@@ -37,7 +38,9 @@ public class FaturaTableModel extends GenericTableModel{
             case 1:
                 return fatura.getValorTotal();
             case 2:
-                return fatura.getDataVencimento();
+            	LocalDate localDate = fatura.getDataVencimento();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                return localDate.format(formatter);
             case 3:
                 return fatura.getStatus();               
             default:

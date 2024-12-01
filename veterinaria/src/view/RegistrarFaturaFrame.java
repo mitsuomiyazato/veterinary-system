@@ -32,6 +32,7 @@ public class RegistrarFaturaFrame extends JFrame {
 
     public RegistrarFaturaFrame(Principal principalFrame, Proprietario cliente) {
         setTitle("Registrar Fatura");
+        setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 211);
         contentPane = new JPanel();

@@ -68,7 +68,7 @@ public class FaturaDAO extends DAO {
     }
 
     public List<Fatura> retrieveAll() {
-        return this.retrieve("SELECT * FROM fatura");
+        return this.retrieve("SELECT * FROM fatura ORDER BY data_vencimento ASC");
     }
     
     public List<Fatura> retrieveByIdProprietario(int id_proprietario) {

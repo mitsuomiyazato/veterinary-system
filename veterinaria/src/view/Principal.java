@@ -56,7 +56,7 @@ import java.awt.Component;
 
 public class Principal {
 
-	private JFrame frmVeterinria;
+	public JFrame frmVeterinria;
 	private JTextField textFieldClienteSelecionado;
 	private JTextField textFieldPacienteSelecionado;
 	private JTextField textFieldEspecieSelecionada;
@@ -102,18 +102,6 @@ public class Principal {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal window = new Principal();
-					window.frmVeterinria.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public Principal() {
 		initialize();
@@ -174,15 +162,17 @@ public class Principal {
 		
 		//INÍCIO JFRAME PRINCIPAL
 		frmVeterinria = new JFrame();
+		frmVeterinria.getContentPane().setBackground(Color.WHITE);
 		frmVeterinria.setResizable(false);
 		frmVeterinria.setTitle("Veterinária");
 		frmVeterinria.setBounds(100, 100, 869, 783);
-		frmVeterinria.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmVeterinria.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmVeterinria.getContentPane().setLayout(null);
 		
 		
 		//INFORMACOES SELECIONADAS
 		JPanel informacaoSelecionada = new JPanel();
+		informacaoSelecionada.setBackground(Color.WHITE);
 		informacaoSelecionada.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informa\u00E7\u00F5es Selecionadas", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		informacaoSelecionada.setBounds(10, 11, 833, 231);
 		frmVeterinria.getContentPane().add(informacaoSelecionada);
@@ -192,6 +182,7 @@ public class Principal {
 		lblClienteSelecionado.setBounds(10, 30, 62, 14);
 		informacaoSelecionada.add(lblClienteSelecionado);
 		textFieldClienteSelecionado = new JTextField();
+		textFieldClienteSelecionado.setBackground(new Color(38, 166, 153));
 		textFieldClienteSelecionado.setEditable(false);
 		lblClienteSelecionado.setLabelFor(textFieldClienteSelecionado);
 		textFieldClienteSelecionado.setBounds(82, 27, 189, 20);
@@ -202,6 +193,7 @@ public class Principal {
 		lblPacienteSelecionado.setBounds(281, 30, 66, 14);
 		informacaoSelecionada.add(lblPacienteSelecionado);
 		textFieldPacienteSelecionado = new JTextField();
+		textFieldPacienteSelecionado.setBackground(new Color(38, 166, 153));
 		textFieldPacienteSelecionado.setEditable(false);
 		lblPacienteSelecionado.setLabelFor(textFieldPacienteSelecionado);
 		textFieldPacienteSelecionado.setColumns(10);
@@ -213,12 +205,14 @@ public class Principal {
 		lblEspecieSelecionada.setBounds(556, 30, 68, 14);
 		informacaoSelecionada.add(lblEspecieSelecionada);
 		textFieldEspecieSelecionada = new JTextField();
+		textFieldEspecieSelecionada.setBackground(new Color(38, 166, 153));
 		textFieldEspecieSelecionada.setEditable(false);
 		textFieldEspecieSelecionada.setColumns(10);
 		textFieldEspecieSelecionada.setBounds(634, 27, 189, 20);
 		informacaoSelecionada.add(textFieldEspecieSelecionada);
 		
 		JPanel panelHistoricoPacienteSelecionado = new JPanel();
+		panelHistoricoPacienteSelecionado.setBackground(Color.WHITE);
 		panelHistoricoPacienteSelecionado.setBorder(new TitledBorder(null, "Historico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelHistoricoPacienteSelecionado.setBounds(10, 55, 813, 165);
 		informacaoSelecionada.add(panelHistoricoPacienteSelecionado);
@@ -228,6 +222,7 @@ public class Principal {
 		lblHistoricoVacinas.setBounds(10, 22, 70, 14);
 		panelHistoricoPacienteSelecionado.add(lblHistoricoVacinas);
 		comboBoxHistoricoVacinas = new JComboBox();
+		comboBoxHistoricoVacinas.setBackground(new Color(129, 226, 217));
 		lblHistoricoVacinas.setLabelFor(comboBoxHistoricoVacinas);
 		comboBoxHistoricoVacinas.setBounds(90, 18, 206, 22);
 		panelHistoricoPacienteSelecionado.add(comboBoxHistoricoVacinas);
@@ -237,6 +232,7 @@ public class Principal {
 		lblHistoricoDoencas.setBounds(10, 78, 70, 14);
 		panelHistoricoPacienteSelecionado.add(lblHistoricoDoencas);
 		comboBoxHistoricoDoencas = new JComboBox();
+		comboBoxHistoricoDoencas.setBackground(new Color(129, 226, 217));
 		comboBoxHistoricoDoencas.setBounds(90, 74, 206, 22);
 		panelHistoricoPacienteSelecionado.add(comboBoxHistoricoDoencas);
 		
@@ -244,6 +240,7 @@ public class Principal {
 		lblHistoricoPeso.setBounds(10, 140, 70, 14);
 		panelHistoricoPacienteSelecionado.add(lblHistoricoPeso);
 		textFieldHistoricoPeso = new JTextField();
+		textFieldHistoricoPeso.setBackground(new Color(129, 226, 217));
 		textFieldHistoricoPeso.setEditable(false);
 		lblHistoricoPeso.setLabelFor(textFieldHistoricoPeso);
 		textFieldHistoricoPeso.setBounds(90, 137, 206, 20);
@@ -254,6 +251,7 @@ public class Principal {
 		lblHistoricoObservacao.setBounds(475, 22, 115, 14);
 		panelHistoricoPacienteSelecionado.add(lblHistoricoObservacao);
 		textAreaHistoricoObservacoes = new JTextArea();
+		textAreaHistoricoObservacoes.setBackground(new Color(129, 226, 217));
 		textAreaHistoricoObservacoes.setEditable(false);
 		textAreaHistoricoObservacoes.setLineWrap(true); 
 		textAreaHistoricoObservacoes.setWrapStyleWord(true);
@@ -265,6 +263,7 @@ public class Principal {
 		panelHistoricoPacienteSelecionado.add(scrollPaneHistoricoObservacoes);
 		
 		btnEditarHistorico = new JButton("Editar");
+		btnEditarHistorico.setBackground(new Color(129, 226, 217));
 		btnEditarHistorico.setEnabled(false);
 		btnEditarHistorico.addActionListener(new ActionListener() {
 			@Override
@@ -348,16 +347,19 @@ public class Principal {
 		panelHistoricoPacienteSelecionado.add(btnEditarHistorico);
 		
 		btnAddVacinas = new JButton("Novo");
+		btnAddVacinas.setBackground(new Color(129, 226, 217));
 		btnAddVacinas.setEnabled(false);
 		btnAddVacinas.setBounds(306, 18, 70, 23);
 		panelHistoricoPacienteSelecionado.add(btnAddVacinas);
 		
 		btnAddDoencas = new JButton("Novo");
+		btnAddDoencas.setBackground(new Color(129, 226, 217));
 		btnAddDoencas.setEnabled(false);
 		btnAddDoencas.setBounds(306, 74, 70, 23);
 		panelHistoricoPacienteSelecionado.add(btnAddDoencas);
 		
 		btnDelVacinas = new JButton("Apagar");
+		btnDelVacinas.setBackground(new Color(129, 226, 217));
 		btnDelVacinas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedIndex = comboBoxHistoricoVacinas.getSelectedIndex();
@@ -376,6 +378,7 @@ public class Principal {
 		panelHistoricoPacienteSelecionado.add(btnDelVacinas);
 		
 		btnDelDoencas = new JButton("Apagar");
+		btnDelDoencas.setBackground(new Color(129, 226, 217));
 		btnDelDoencas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedIndex = comboBoxHistoricoDoencas.getSelectedIndex();
@@ -400,10 +403,12 @@ public class Principal {
 		tabbedPane.setBounds(10, 253, 833, 480);
 		frmVeterinria.getContentPane().add(tabbedPane);
 		JPanel TabbedPanelCliente = new JPanel();
+		TabbedPanelCliente.setBackground(Color.WHITE);
 		tabbedPane.addTab("Clientes e Pacientes", null, TabbedPanelCliente, null);
 		TabbedPanelCliente.setLayout(null);
 		
 		JPanel GroupBoxCliente = new JPanel();
+		GroupBoxCliente.setBackground(Color.WHITE);
 		GroupBoxCliente.setBorder(new TitledBorder(null, "Selecione o Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxCliente.setBounds(10, 11, 808, 210);
 		TabbedPanelCliente.add(GroupBoxCliente);
@@ -413,6 +418,7 @@ public class Principal {
 		lblBuscarCliente.setBounds(10, 26, 46, 14);
 		GroupBoxCliente.add(lblBuscarCliente);
 		textFieldBuscarCliente = new JTextField();
+		textFieldBuscarCliente.setBackground(new Color(129, 226, 217));
 		lblBuscarCliente.setLabelFor(textFieldBuscarCliente);
 		textFieldBuscarCliente.setBounds(66, 23, 228, 20);
 		GroupBoxCliente.add(textFieldBuscarCliente);
@@ -435,6 +441,7 @@ public class Principal {
 		});
 		
 		JButton btnTodosCliente = new JButton("Todos");
+		btnTodosCliente.setBackground(new Color(129, 226, 217));
 		btnTodosCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -445,6 +452,7 @@ public class Principal {
 		GroupBoxCliente.add(btnTodosCliente);
 		
 		JButton btnNovoCliente = new JButton("Novo Cliente");
+		btnNovoCliente.setBackground(new Color(129, 226, 217));
 		btnNovoCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -456,6 +464,7 @@ public class Principal {
 		GroupBoxCliente.add(btnNovoCliente);
 		
 		JButton btnApagaCliente = new JButton("Apagar Cliente");
+		btnApagaCliente.setBackground(new Color(129, 226, 217));
 		btnApagaCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -478,6 +487,7 @@ public class Principal {
 		GroupBoxCliente.add(btnApagaCliente);
 		
 		JButton btnEditarCliente = new JButton("Editar Cliente");
+		btnEditarCliente.setBackground(new Color(129, 226, 217));
 		btnEditarCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -497,6 +507,7 @@ public class Principal {
 		
 		//TABELA CLIENTE 
 		tableCliente = new JTable();
+		tableCliente.setBackground(new Color(184, 239, 234));
 		tableCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -535,6 +546,7 @@ public class Principal {
 		//SELECIONAR PACIENTE
 		//TABELA PACIENTE
 		JPanel GroupBoxPaciente = new JPanel();
+		GroupBoxPaciente.setBackground(Color.WHITE);
 		GroupBoxPaciente.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Selecione o Paciente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxPaciente.setBounds(10, 224, 808, 217);
 		TabbedPanelCliente.add(GroupBoxPaciente);
@@ -544,6 +556,7 @@ public class Principal {
 		lblBuscarPaciente.setBounds(9, 26, 46, 14);
 		GroupBoxPaciente.add(lblBuscarPaciente);		
 		textFieldBuscarPaciente = new JTextField();
+		textFieldBuscarPaciente.setBackground(new Color(129, 226, 217));
 		lblBuscarPaciente.setLabelFor(textFieldBuscarPaciente);
 		textFieldBuscarPaciente.setColumns(10);
 		textFieldBuscarPaciente.setBounds(65, 23, 233, 20);
@@ -586,6 +599,7 @@ public class Principal {
 		GroupBoxPaciente.add(textFieldBuscarPaciente);
 	
 		JButton btnTodosPaciente = new JButton("Todos");
+		btnTodosPaciente.setBackground(new Color(129, 226, 217));
 		btnTodosPaciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -596,6 +610,7 @@ public class Principal {
 		GroupBoxPaciente.add(btnTodosPaciente);
 				
 		JButton btnNovoPaciente = new JButton("Novo Paciente");
+		btnNovoPaciente.setBackground(new Color(129, 226, 217));
 		btnNovoPaciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -614,10 +629,12 @@ public class Principal {
 		GroupBoxPaciente.add(btnNovoPaciente);
 				
 		JButton btnApagaPaciente = new JButton("Apagar Paciente");
+		btnApagaPaciente.setBackground(new Color(129, 226, 217));
 		btnApagaPaciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(Controller.getPacienteSelecionado() != null) {
+					AgendamentoDAO.getInstance().deleteByPaciente(Controller.getPacienteSelecionado().getId());
 					PacienteDAO.getInstance().delete(Controller.getPacienteSelecionado());
 					Controller.setTableModel(tablePaciente, new PacienteTableModel(PacienteDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));
 					Controller.setTableModel(tableAgendamento, new AgendamentoTableModel(AgendamentoDAO.getInstance().retrieveByIdPaciente(Controller.getPacienteSelecionado().getId())));
@@ -633,6 +650,7 @@ public class Principal {
 		GroupBoxPaciente.add(btnApagaPaciente);
 				
 		JButton btnEditarPaciente = new JButton("Editar Paciente");
+		btnEditarPaciente.setBackground(new Color(129, 226, 217));
 		btnEditarPaciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -658,6 +676,7 @@ public class Principal {
 		GroupBoxPaciente.add(btnEditarPaciente);
 				
 		tablePaciente = new JTable();
+		tablePaciente.setBackground(new Color(184, 239, 234));
 		tablePaciente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -706,11 +725,13 @@ public class Principal {
 		
 		//TAB NOVA CONSULTA
 		JPanel TabbedPanelAgendamento = new JPanel();
+		TabbedPanelAgendamento.setBackground(Color.WHITE);
 		tabbedPane.addTab("Veterinários e Consultas", null, TabbedPanelAgendamento, null);
 		TabbedPanelAgendamento.setLayout(null);
 		
 		//SELECIONAR VETERINARIO
 		JPanel GroupBoxVeterinario = new JPanel();
+		GroupBoxVeterinario.setBackground(Color.WHITE);
 		GroupBoxVeterinario.setBorder(new TitledBorder(null, "Selecionar Veterin\u00E1rio", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupBoxVeterinario.setBounds(10, 11, 808, 213);
 		TabbedPanelAgendamento.add(GroupBoxVeterinario);
@@ -721,6 +742,7 @@ public class Principal {
 		GroupBoxVeterinario.add(lblBuscarVeterinario);
 		
 		textFieldBuscarVeterinario = new JTextField();
+		textFieldBuscarVeterinario.setBackground(new Color(129, 226, 217));
 		lblBuscarVeterinario.setLabelFor(textFieldBuscarVeterinario);
 		textFieldBuscarVeterinario.setColumns(10);
 		textFieldBuscarVeterinario.setBounds(66, 26, 203, 20);
@@ -744,6 +766,7 @@ public class Principal {
 		GroupBoxVeterinario.add(textFieldBuscarVeterinario);
 		
 		JButton btnTodosVeterinario = new JButton("Todos");
+		btnTodosVeterinario.setBackground(new Color(129, 226, 217));
 		btnTodosVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -754,6 +777,7 @@ public class Principal {
 		GroupBoxVeterinario.add(btnTodosVeterinario);
 		
 		JButton btnNovoVeterinario = new JButton("Novo Veterinário");
+		btnNovoVeterinario.setBackground(new Color(129, 226, 217));
 		btnNovoVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -765,6 +789,7 @@ public class Principal {
 		GroupBoxVeterinario.add(btnNovoVeterinario);
 		
 		JButton btnApagaVeterinario = new JButton("Apagar Veterinário");
+		btnApagaVeterinario.setBackground(new Color(129, 226, 217));
 		btnApagaVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -786,6 +811,7 @@ public class Principal {
 		GroupBoxVeterinario.add(btnApagaVeterinario);
 		
 		JButton btnEditarVeterinario = new JButton("Editar Veterinário");
+		btnEditarVeterinario.setBackground(new Color(129, 226, 217));
 		btnEditarVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -809,6 +835,7 @@ public class Principal {
 		
 		//TABLE VETERINARIO
 		tableVeterinario = new JTable();
+		tableVeterinario.setBackground(new Color(184, 239, 234));
 		tableVeterinario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -830,6 +857,7 @@ public class Principal {
 		
 		//AGENDAR NOVA CONSULTA
 		JPanel GroupBoxAgendamento = new JPanel();
+		GroupBoxAgendamento.setBackground(Color.WHITE);
 		GroupBoxAgendamento.setBorder(new TitledBorder(null, "Agendar nova consulta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupBoxAgendamento.setBounds(10, 228, 808, 213);
 		TabbedPanelAgendamento.add(GroupBoxAgendamento);
@@ -840,6 +868,7 @@ public class Principal {
 		lblAgendamentoPaciente.setLabelFor(textFieldAgendamentoPaciente);
 		GroupBoxAgendamento.add(lblAgendamentoPaciente);
 		textFieldAgendamentoPaciente = new JTextField();
+		textFieldAgendamentoPaciente.setBackground(new Color(38, 166, 153));
 		textFieldAgendamentoPaciente.setEditable(false);
 		textFieldAgendamentoPaciente.setColumns(10);
 		textFieldAgendamentoPaciente.setBounds(79, 24, 203, 20);
@@ -850,6 +879,7 @@ public class Principal {
 		lblAgendamentoVeterinario.setBounds(10, 58, 59, 14);
 		GroupBoxAgendamento.add(lblAgendamentoVeterinario);
 		textFieldAgendamentoVeterinario = new JTextField();
+		textFieldAgendamentoVeterinario.setBackground(new Color(38, 166, 153));
 		textFieldAgendamentoVeterinario.setEditable(false);
 		textFieldAgendamentoVeterinario.setColumns(10);
 		textFieldAgendamentoVeterinario.setBounds(79, 55, 203, 20);
@@ -860,6 +890,7 @@ public class Principal {
 		lblAgendamentoServico.setBounds(10, 89, 59, 14);
 		GroupBoxAgendamento.add(lblAgendamentoServico);
 		textFieldAgendamentoServico = new JTextField();
+		textFieldAgendamentoServico.setBackground(new Color(129, 226, 217));
 		textFieldAgendamentoServico.setColumns(10);
 		textFieldAgendamentoServico.setBounds(79, 86, 203, 20);
 		GroupBoxAgendamento.add(textFieldAgendamentoServico);
@@ -869,6 +900,7 @@ public class Principal {
 		lblAgendamentoData.setLabelFor(formattedTextFieldDataAgendamento);
 		GroupBoxAgendamento.add(lblAgendamentoData);
 		formattedTextFieldDataAgendamento = new JFormattedTextField();
+		formattedTextFieldDataAgendamento.setBackground(new Color(129, 226, 217));
 		formattedTextFieldDataAgendamento.setBounds(79, 117, 203, 20);
         try {
             MaskFormatter dateMask = new MaskFormatter("##/##/####");
@@ -884,6 +916,7 @@ public class Principal {
 		lblAgendamentoHora.setLabelFor(formattedTextFieldAgendamentoHora);
 		GroupBoxAgendamento.add(lblAgendamentoHora);
 		formattedTextFieldAgendamentoHora = new JFormattedTextField();
+		formattedTextFieldAgendamentoHora.setBackground(new Color(129, 226, 217));
 		formattedTextFieldAgendamentoHora.setBounds(79, 148, 203, 20);
         try {
             MaskFormatter timeMask = new MaskFormatter("##:##");
@@ -895,6 +928,7 @@ public class Principal {
 		GroupBoxAgendamento.add(formattedTextFieldAgendamentoHora);
 		
 		JButton btnAgendamentoNovo = new JButton("Novo Agendamento");
+		btnAgendamentoNovo.setBackground(new Color(129, 226, 217));
 		btnAgendamentoNovo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -928,6 +962,7 @@ public class Principal {
 		
 		//TABELA AGENDAMENTOS EXISTENTES
 		JPanel panelAgendamentosExistentes = new JPanel();
+		panelAgendamentosExistentes.setBackground(Color.WHITE);
 		panelAgendamentosExistentes.setBorder(new TitledBorder(null, "Agendamentos existentes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelAgendamentosExistentes.setBounds(292, 11, 506, 191);
 		GroupBoxAgendamento.add(panelAgendamentosExistentes);
@@ -955,6 +990,7 @@ public class Principal {
 		panelAgendamentosExistentes.add(scrollPaneTableAgendamentoPaciente);
 				
 		JButton btnAgendamentoExcluir = new JButton("Excluir");
+		btnAgendamentoExcluir.setBackground(new Color(129, 226, 217));
 		btnAgendamentoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -974,6 +1010,7 @@ public class Principal {
 		panelAgendamentosExistentes.add(btnAgendamentoExcluir);
 				
 		JButton btnAgendamentoConcluir = new JButton("Concluir");
+		btnAgendamentoConcluir.setBackground(new Color(129, 226, 217));
 		btnAgendamentoConcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -993,6 +1030,7 @@ public class Principal {
 		panelAgendamentosExistentes.add(btnAgendamentoConcluir);
 				
 		JButton btnAgendamentoCancelar = new JButton("Cancelar");
+		btnAgendamentoCancelar.setBackground(new Color(129, 226, 217));
 		btnAgendamentoCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1015,10 +1053,12 @@ public class Principal {
 		
 		//TAB RECEITA MÉDICA
 		JPanel TabbedReceitaMedica = new JPanel();
+		TabbedReceitaMedica.setBackground(Color.WHITE);
 		tabbedPane.addTab("Receitas Médicas", null, TabbedReceitaMedica, null);
 		TabbedReceitaMedica.setLayout(null);
 				
 		JPanel panelSelecionarInfo = new JPanel();
+		panelSelecionarInfo.setBackground(Color.WHITE);
 		panelSelecionarInfo.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Selecione as informa\u00E7\u00F5es", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSelecionarInfo.setBounds(10, 11, 808, 225);
 		TabbedReceitaMedica.add(panelSelecionarInfo);
@@ -1028,6 +1068,7 @@ public class Principal {
 		lblVeterinarioSelecionadoReceita.setBounds(10, 30, 66, 14);
 		panelSelecionarInfo.add(lblVeterinarioSelecionadoReceita);
 		textFieldVeterinarioSelecionadoReceita = new JTextField();
+		textFieldVeterinarioSelecionadoReceita.setBackground(new Color(38, 166, 153));
 		lblVeterinarioSelecionadoReceita.setLabelFor(textFieldVeterinarioSelecionadoReceita);
 		textFieldVeterinarioSelecionadoReceita.setEditable(false);
 		textFieldVeterinarioSelecionadoReceita.setColumns(10);
@@ -1039,9 +1080,11 @@ public class Principal {
 		lblMedicamentosReceita.setBounds(330, 31, 97, 14);
 		panelSelecionarInfo.add(lblMedicamentosReceita);
 		comboBoxMedicamentosReceita = new JComboBox();
+		comboBoxMedicamentosReceita.setBackground(new Color(129, 226, 217));
 		comboBoxMedicamentosReceita.setBounds(437, 27, 241, 22);
 		panelSelecionarInfo.add(comboBoxMedicamentosReceita);
 		JButton btnAdicionarMedicamentoReceita = new JButton("Adicionar");
+		btnAdicionarMedicamentoReceita.setBackground(new Color(129, 226, 217));
 		btnAdicionarMedicamentoReceita.setBounds(688, 27, 110, 23);
 		panelSelecionarInfo.add(btnAdicionarMedicamentoReceita);
 		
@@ -1065,6 +1108,7 @@ public class Principal {
 		lblObservacoesReceita.setBounds(10, 86, 110, 14);
 		panelSelecionarInfo.add(lblObservacoesReceita);
 		textAreaObservacoesReceita = new JTextArea();
+		textAreaObservacoesReceita.setBackground(new Color(129, 226, 217));
 		textAreaObservacoesReceita.setLineWrap(true); 
 		textAreaObservacoesReceita.setWrapStyleWord(true);
 		JScrollPane scrollPaneObservacoesReceita = new JScrollPane(textAreaObservacoesReceita);
@@ -1090,6 +1134,7 @@ public class Principal {
 		timer.start();
 		
 		JButton btnImprimirReceita = new JButton("Imprimir");
+		btnImprimirReceita.setBackground(new Color(129, 226, 217));
 		btnImprimirReceita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1124,6 +1169,7 @@ public class Principal {
 		panelSelecionarInfo.add(btnImprimirReceita);
 			
 		JPanel panelBuscarReceita = new JPanel();
+		panelBuscarReceita.setBackground(Color.WHITE);
 		panelBuscarReceita.setBorder(new TitledBorder(null, "Buscar Receitas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelBuscarReceita.setBounds(10, 247, 808, 194);
 		TabbedReceitaMedica.add(panelBuscarReceita);
@@ -1131,6 +1177,7 @@ public class Principal {
 		
 		//TABELA RECEITA
 		tableReceita = new JTable();
+		tableReceita.setBackground(new Color(184, 239, 234));
 		tableReceita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1152,11 +1199,12 @@ public class Principal {
 		scrollPaneTableReceita.setBounds(10, 49, 788, 134);
 		panelBuscarReceita.add(scrollPaneTableReceita);  
 		
-		JLabel lblInfoReceitas = new JLabel("Clique para mais detalhes.");
+		JLabel lblInfoReceitas = new JLabel("Clique para mais detalhes");
 		lblInfoReceitas.setBounds(10, 24, 180, 14);
 		panelBuscarReceita.add(lblInfoReceitas);
 		
 		JButton btnDeletarReceita = new JButton("Deletar");
+		btnDeletarReceita.setBackground(new Color(129, 226, 217));
 		btnDeletarReceita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1179,16 +1227,19 @@ public class Principal {
 				
 		//TAB ESTOQUE
 		JPanel TabbedPanelEstoque = new JPanel();
+		TabbedPanelEstoque.setBackground(Color.WHITE);
 		tabbedPane.addTab("Estoque", null, TabbedPanelEstoque, null);
 		TabbedPanelEstoque.setLayout(null);
 		
 		JPanel GroupBoxProdutos = new JPanel();
+		GroupBoxProdutos.setBackground(Color.WHITE);
 		GroupBoxProdutos.setLayout(null);
 		GroupBoxProdutos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Produtos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxProdutos.setBounds(10, 11, 808, 430);
 		TabbedPanelEstoque.add(GroupBoxProdutos);
 		
 		JButton btnTodosProdutos = new JButton("Todos");
+		btnTodosProdutos.setBackground(new Color(129, 226, 217));
 		btnTodosProdutos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1199,6 +1250,7 @@ public class Principal {
 		GroupBoxProdutos.add(btnTodosProdutos);
 		
 		JButton btnNovoProduto = new JButton("Novo Produto");
+		btnNovoProduto.setBackground(new Color(129, 226, 217));
 		btnNovoProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1210,6 +1262,7 @@ public class Principal {
 		GroupBoxProdutos.add(btnNovoProduto);
 		
 		JButton btnApagaProduto = new JButton("Apagar Produto");
+		btnApagaProduto.setBackground(new Color(129, 226, 217));
 		btnApagaProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1232,6 +1285,7 @@ public class Principal {
 		//TABELA PRODUTOS
 		
 		tableProdutoEstoque = new JTable();
+		tableProdutoEstoque.setBackground(new Color(184, 239, 234));
 		tableProdutoEstoque.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -1252,6 +1306,7 @@ public class Principal {
 		//FIM TABELA PRODUTOS
 		
 		textFieldBuscarProduto = new JTextField();
+		textFieldBuscarProduto.setBackground(new Color(129, 226, 217));
 		textFieldBuscarProduto.setColumns(10);
 		textFieldBuscarProduto.setBounds(66, 22, 281, 20);
 		textFieldBuscarProduto.getDocument().addDocumentListener(new DocumentListener() {
@@ -1278,10 +1333,12 @@ public class Principal {
 		GroupBoxProdutos.add(lblBuscarProduto);
 		//FIM TAB ESTOQUE
 		JPanel TabbedPanelFatura = new JPanel();
+		TabbedPanelFatura.setBackground(Color.WHITE);
 		tabbedPane.addTab("Faturas", null, TabbedPanelFatura, null);
 		TabbedPanelFatura.setLayout(null);
 		
 		JPanel GroupBoxFatura = new JPanel();
+		GroupBoxFatura.setBackground(Color.WHITE);
 		GroupBoxFatura.setLayout(null);
 		GroupBoxFatura.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Faturas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GroupBoxFatura.setBounds(10, 11, 808, 430);
@@ -1292,6 +1349,7 @@ public class Principal {
 		GroupBoxFatura.add(lblBuscarFatura);
 				
 		JButton btnTodosFatura = new JButton("Todos");
+		btnTodosFatura.setBackground(new Color(129, 226, 217));
 		btnTodosFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1302,6 +1360,7 @@ public class Principal {
 		GroupBoxFatura.add(btnTodosFatura);
 				
 		JButton btnNovaFatura = new JButton("Nova fatura");
+		btnNovaFatura.setBackground(new Color(129, 226, 217));
 		btnNovaFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1320,6 +1379,7 @@ public class Principal {
 		GroupBoxFatura.add(btnNovaFatura);
 				
 		JButton btnApagarFatura = new JButton("Apagar Fatura");
+		btnApagarFatura.setBackground(new Color(129, 226, 217));
 		btnApagarFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1327,14 +1387,7 @@ public class Principal {
 					{
 						FaturaDAO.getInstance().delete(Controller.getFaturaSelecionado());
 						Controller.setFaturaSelecionadoNull();
-						if(Controller.getClienteSelecionado() != null)
-						{
-							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));							
-						}
-						else
-						{
-							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
-						}
+						Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
 					}
 					else
 					{
@@ -1346,6 +1399,7 @@ public class Principal {
 		GroupBoxFatura.add(btnApagarFatura);
 				
 		JButton btnConcluirFatura = new JButton("Concluir Fatura");
+		btnConcluirFatura.setBackground(new Color(129, 226, 217));
 		btnConcluirFatura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1353,15 +1407,8 @@ public class Principal {
 					{
 						Fatura f = new Fatura(Controller.getFaturaSelecionado().getId(), Controller.getFaturaSelecionado().getProprietario(), Controller.getFaturaSelecionado().getValorTotal(), Fatura.StatusPagamento.PAGO, Controller.getFaturaSelecionado().getDataVencimento());
 						FaturaDAO.getInstance().update(f);
-						
-						if(Controller.getClienteSelecionado() != null)
-						{
-							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));							
-						}
-						else
-						{
-							Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
-						}
+						Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));
+
 					}
 					else
 					{
@@ -1373,6 +1420,7 @@ public class Principal {
 		GroupBoxFatura.add(btnConcluirFatura);
 		
 		tableFatura = new JTable();
+		tableFatura.setBackground(new Color(184, 239, 234));
 		tableFatura.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -1390,6 +1438,7 @@ public class Principal {
 		GroupBoxFatura.add(scrollPaneFatura);
 		
 		JComboBox<Fatura.StatusPagamento> comboBoxBuscarFatura = new JComboBox();
+		comboBoxBuscarFatura.setBackground(new Color(129, 226, 217));
 		comboBoxBuscarFatura.setBounds(83, 22, 211, 22);
 		GroupBoxFatura.add(comboBoxBuscarFatura);
 		comboBoxBuscarFatura.addItem(null);
@@ -1400,25 +1449,6 @@ public class Principal {
 		comboBoxBuscarFatura.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	if(Controller.getClienteSelecionado() != null)
-		    	{
-			        Fatura.StatusPagamento statusSelecionado = (Fatura.StatusPagamento) comboBoxBuscarFatura.getSelectedItem();
-			        if (statusSelecionado == Fatura.StatusPagamento.EM_ATRASO) {
-			            Controller.setTableModel(tableFatura, new FaturaTableModel(
-			                FaturaDAO.getInstance().retrieveByStatusProprietario(Controller.getClienteSelecionado().getId(), Fatura.StatusPagamento.EM_ATRASO)));
-			        } else if (statusSelecionado == Fatura.StatusPagamento.PENDENTE) {
-			            Controller.setTableModel(tableFatura, new FaturaTableModel(
-			                FaturaDAO.getInstance().retrieveByStatusProprietario(Controller.getClienteSelecionado().getId(), Fatura.StatusPagamento.PENDENTE)));
-			        } else if (statusSelecionado == Fatura.StatusPagamento.PAGO){
-			            Controller.setTableModel(tableFatura, new FaturaTableModel(
-			                FaturaDAO.getInstance().retrieveByStatusProprietario(Controller.getClienteSelecionado().getId(), Fatura.StatusPagamento.PAGO)));
-			        } else
-			        {
-			        	Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveByIdProprietario(Controller.getClienteSelecionado().getId())));	
-			        }
-		    	}
-		    	else
-		    	{
 		    		Fatura.StatusPagamento statusSelecionado = (Fatura.StatusPagamento) comboBoxBuscarFatura.getSelectedItem();
 			        if (statusSelecionado == Fatura.StatusPagamento.EM_ATRASO) {
 			            Controller.setTableModel(tableFatura, new FaturaTableModel(
@@ -1433,7 +1463,6 @@ public class Principal {
 			        {
 			        	Controller.setTableModel(tableFatura, new FaturaTableModel(FaturaDAO.getInstance().retrieveAll()));	
 			        }
-		    	}
 		    }
 		});
 		

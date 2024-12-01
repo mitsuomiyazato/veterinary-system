@@ -1,12 +1,18 @@
 package view;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import model.ReceitaMedica;
 
 public class ReceitaTableModel extends GenericTableModel{
 
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	
 	public ReceitaTableModel(List vDados){
-		super(vDados, new String[]{"Veterinário", "Observacoes", "Data"});
+		super(vDados, new String[]{"Veterinário", "Observacoes", "Data e hora"});
 	}
 
     @Override
@@ -33,7 +39,9 @@ public class ReceitaTableModel extends GenericTableModel{
             case 1:
                 return receita.getObservacoes();
             case 2:
-                return receita.getDataEmissao();                
+            	LocalDateTime localDateTime = receita.getDataEmissao();
+                Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+                return dateFormat.format(date);
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }

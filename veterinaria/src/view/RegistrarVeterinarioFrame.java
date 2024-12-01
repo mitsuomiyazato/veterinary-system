@@ -28,6 +28,7 @@ public class RegistrarVeterinarioFrame extends JFrame {
 	public RegistrarVeterinarioFrame(Principal principalFrame, Veterinario veterinario)
 	{
 		buildJFrame(principalFrame);
+		setResizable(false);
 		textFieldRegistrarNome.setText(veterinario.getNome());
 		textFieldRegistrarTelefone.setText(veterinario.getTelefone());
 		textFieldRegistrarEmail.setText(veterinario.getEmail());

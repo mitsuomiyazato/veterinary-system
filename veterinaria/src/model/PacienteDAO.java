@@ -128,6 +128,12 @@ public class PacienteDAO extends DAO {
 
     public void delete(Paciente paciente) {
         try {
+            PreparedStatement stmtAgendamento = DAO.getConnection().prepareStatement(
+                    "DELETE FROM agendamento WHERE id = ?"
+                );
+                stmtAgendamento.setInt(1, paciente.getId());
+                executeUpdate(stmtAgendamento);
+               
             PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM paciente WHERE id = ?");
             stmt.setInt(1, paciente.getId());
             executeUpdate(stmt);
@@ -138,6 +144,13 @@ public class PacienteDAO extends DAO {
     
     public void deleteByProprietario(int id_proprietario) {
         try {
+            // Deletar todos os agendamentos dos pacientes do proprietário
+            PreparedStatement stmtAgendamento = DAO.getConnection().prepareStatement(
+                "DELETE FROM agendamento WHERE id_paciente IN (SELECT id FROM paciente WHERE id_proprietario = ?)"
+            );
+            stmtAgendamento.setInt(1, id_proprietario);
+            executeUpdate(stmtAgendamento);
+            
             PreparedStatement stmt = DAO.getConnection().prepareStatement("DELETE FROM paciente WHERE id_proprietario = ?");
             stmt.setInt(1, id_proprietario);
             executeUpdate(stmt);
